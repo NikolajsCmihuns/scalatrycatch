@@ -23,4 +23,34 @@ object TestCode extends App {
   println(allCardsWithForYield)
   println(allCardsWithFlatMap)
 
+  case class MobileProduct(name: String)
+
+  val userId = Some("id")
+  val password = Some("password")
+  val email = Some("email@asd.com")
+
+  def getAccountIdByUserId(userId: String): Option[String] = Some("123456")
+
+  def getProductsByAccountId(accountId: String): Option[List[MobileProduct]] = {
+    Some(List(MobileProduct("free calls"), MobileProduct("free 10GB")))
+  }
+
+  val productNames = for {
+    userId <- userId
+    accountId <- getAccountIdByUserId(userId)
+    product <- getProductsByAccountId(accountId)
+  } yield {
+    product.map(_.name)
+  }
+
+  val productNamesFlatMap = userId flatMap { userId =>
+    getAccountIdByUserId(userId) flatMap { accountId =>
+      getProductsByAccountId(accountId) map { product =>
+        product map { p => p.name} }}}
+
+  println(productNames)
+  println(productNamesFlatMap)
+
+
+
 }
