@@ -53,4 +53,31 @@ object TestCode extends App {
 
 
 
+  println(List(1, 2, 3) map { x => List(x + 1) })
+  println((List(1, 2, 3) map {x =>List(x + 1)}).flatten)
+  println(List(1, 2, 3) flatMap { x => List(x + 1) })
+  // println(List(1, 2, 3) flatMap { x =>  x + 2 }) won't compile
+
+  def function1(s: String) = Some(s + "_func1")
+  def function2(s: String) = Some(s + "_func2")
+  def function3(s: String) = Some(s + "_func3")
+  def function4(s: String) = Some(s + "_func4_end")
+
+  (function1("value1") flatMap { value1 =>
+    function2(value1) flatMap {resultFromFunc2 =>
+      function3(resultFromFunc2) flatMap { resultFromFunc3 =>
+        function4(resultFromFunc3) }}} ).foreach(println)
+
+  (function1("value1") flatMap { value1 =>
+    function2(value1) flatMap {resultFromFunc2 =>
+      function3(resultFromFunc2) map { resultFromFunc3 =>
+        function4(resultFromFunc3) }}} ).foreach(println)
+
+
+  (function1("value1") map { value1 =>
+    function2(value1) map {resultFromFunc2 =>
+      function3(resultFromFunc2) map { resultFromFunc3 =>
+        function4(resultFromFunc3) }}} ).foreach(println)
+
+
 }

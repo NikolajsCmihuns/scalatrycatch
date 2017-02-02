@@ -12,7 +12,7 @@ trait FlatMapChain {
 
   def func1[A, B]: Future[B]
   def func2[B, C](input2: B): Future[C]
-  def func3[C, D](input3: C): Future[D] = func1 flatMap { b => func2(b) }
-  def func4[D, E](input3: D): Future[E] = func1 flatMap { b => func2(b) flatMap {d => func4(d)}}
+  //def func3[C, D](input3: C): Future[D] = func1 flatMap { b => func2(b) }
+  //def func4[D, E](input3: D): Future[E] = func1 flatMap { b => func2(b) flatMap {d => func3(d)}}
 
 }
